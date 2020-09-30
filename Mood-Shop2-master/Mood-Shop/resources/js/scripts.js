@@ -1,5 +1,11 @@
 import data from './data.js'
+const itemList = document.getElementById('item-list')
 const itemsContainer = document.getElementById('items')
+itemList.innerHTML = '<li> Hello World</li>'
+const cartQty = document.getElementById('cart-qty')
+const cartTotal = document.getElementById('cart-total')
+
+
 
 for (let i=0; i<data.length; ++i) {
     let newDiv = document.createElement('div');
@@ -32,7 +38,7 @@ for (let i=0; i<data.length; ++i) {
     itemsContainer.appendChild(newDiv)
   }
 
-
+const cart = []
 
 function addItem (name, price) {
     for (let i = 0; i < cart.length; i += 1) {
@@ -49,12 +55,22 @@ function addItem (name, price) {
 // Show Items
 function showItems () {
     const qty = getQty()
-    console.log(`You have ${qty} items in your cart`)
+    // console.log(`You have ${qty} items in your cart`)
+
+    let itemStr = ''
     for (let i = 0; i < cart.length; i += 1) {
         console.log(`-${ cart[i].name} $${cart[i].price} x ${cart[i].qty} `)
+      //  { name:'Apple', price: 0.99, qty: 3}
+
+        const {name, price, qty} = cart[i]
+        itemStr += `<li> ${name} $${price} x ${qty} = ${qty * price} </li>`
     }
+
+    itemList.innerHTML = itemStr 
+
     const total = getTotal()
-    console.log(`Your total is: $${total.toFixed(2)}`)
+    // console.log(`Your total is: $${total.toFixed(2)}`)
+    cartTotal.innerHTML = `Total in cart: $${getTotal()}`
 }
 
 
