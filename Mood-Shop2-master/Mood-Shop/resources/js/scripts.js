@@ -42,15 +42,46 @@ for (let i=0; i<data.length; ++i) {
 const cart [ ]
 
 function addItem (name, price) {
-    const item = { name: name, price: price, qty: 1 }
+    for (let i = 0; i < cart.length; i += 1) {
+        if (cart[i].name === name) {
+            cart[i].qty += 1
+            return
+        }
+    }
+    const item = { name, price, qty: 1 }
     cart.push(item)
 
 
 }
-
+// Show Items
 function showItems () {
-    console.log(`You have ${cart.length} items in your cart`    )
+    const qty = getQty()
+    console.log(`You have ${qty} items in your cart`)
+    for (let i = 0; i < cart.length; i += 1) {
+        console.log(`-${ cart[i].name} $${cart[i].price} x ${cart[i].qty} `)
+    }
+    const total = getTotal()
+    console.log(`Your total is: $${total.toFixed(2)}`)
 }
+
+// Get Quantity
+function getQty() {
+    let qty = 0
+    for (let i = 0; i < cart.length; i += 1) {
+        qty += cart[i].qty
+    }
+    return qty
+}
+
+// Get the Total
+function getTotal() {
+    let total = 0
+    for (let i = 0; i < cart.length; i += 1) {
+        total = total + `${cart[i].price} * ${cart[i].qty}`
+    }
+
+}
+
 
 addItem(happy, 14.99)
 addItem(sad, 13.99)
