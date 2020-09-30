@@ -57,6 +57,7 @@ function showItems () {
     console.log(`Your total is: $${total.toFixed(2)}`)
 }
 
+
 // Get Quantity
 function getQty() {
     let qty = 0
@@ -75,11 +76,33 @@ function getTotal() {
 
 }
 
+function removeItem(name, qty = 0) {
+    for (let i = 0; i < cart.length; i += 1) {
+        if (cart[i].name === name) {
+            if (qty > 0) {
+                cart[i].qty -= qty
+            }
+
+            
+            if (cart[i].qty < 1 || qty === 0) {
+                cart.splice(i, 1)
+            }
+
+            return 
+        }
+    }
+}
+
 
 addItem(happy, 14.99)
 addItem(sad, 13.99)
 
 showItems()
+
+removeItem(happy)
+removeItem(sad, 1)
+
+
 
 
 
